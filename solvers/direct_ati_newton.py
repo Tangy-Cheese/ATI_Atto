@@ -44,5 +44,27 @@ def saddle(x: list[float], p: float, I_p_eff: float)->list[float]:
 
     return [R.real, R.imag]
 
+def init_guess(branch:str, I_p_eff:float)->list[float]:
+    """Important initial guesses for the iterative solver. 
+
+    :param branch: Which set of solutions depending on what 
+        branch. 
+    :param I_p_eff: Effective ionisation potential.
+    :return: Return the solutions for saddle when p=0 which
+        can be analytically determined.
+    """
+    im_init = np.arcsinh(omega * np.sqrt(2 * I_p_eff) / E_0) / omega
+
+    if branch == "short":
+        re_init = -PI / (2 * omega)
+
+    else:
+        re_init = +PI / (2 * omega)
+ 
+    return [re_init, im_init]
+
+
+
+
 if __name__ == "__main__":
     pass
